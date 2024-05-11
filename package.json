@@ -1,0 +1,11 @@
+{
+  "name": "weather-and-traffic",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/zfchung1/weather-and-traffic.git",
+  "author": "ZF Chung (Zack) <40996616+zfchung1@users.noreply.github.com>",
+  "license": "UNLICENSED",
+  "private": true,
+  "workspaces": ["packages/frontend/*"]
+
+}
