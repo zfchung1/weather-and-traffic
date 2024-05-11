@@ -1,11 +1,16 @@
 {
-  "name": "weather-and-traffic",
+  "name": "@weather-and-traffic/root",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/zfchung1/weather-and-traffic.git",
   "author": "ZF Chung (Zack) <40996616+zfchung1@users.noreply.github.com>",
   "license": "UNLICENSED",
   "private": true,
-  "workspaces": ["packages/frontend/*"]
-
+  "scripts": {
+    "build": "yarn workspaces foreach -Apt run build",
+    "start": "concurrently -c -n web,components,services,types,server \"npm run start -w packages/frontend/web\" \"npm run start -w ./packages/frontend/components\" \"npm run start -w ./packages/frontend/services\" \"npm run start -w ./packages/frontend/types\" \"npm run start -w packages/api/server\"",
+    "clean": "rm -rf node_modules ./packages/*/*/{dist,node_modules,build,coverage,storybook-static}",
+    "reset": "yarn clean && yarn && yarn build"
+  },
+  "workspaces": ["packages/frontend/web"]
 }
