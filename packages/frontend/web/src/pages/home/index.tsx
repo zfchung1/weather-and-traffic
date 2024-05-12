@@ -5,6 +5,7 @@ import { GenericTimePicker } from "../../components/TimePicker";
 import { getLocationService } from "@weather-and-traffic/services/dist";
 import { NewLocationList } from "../../components/List";
 import { getWeatherForecast } from "@weather-and-traffic/services/dist";
+import { Image } from "antd";
 
 export const Home: FC = () => {
 	const [date, setDate] = useState<string>();
@@ -12,6 +13,7 @@ export const Home: FC = () => {
 	const [time, setTime] = useState<Dayjs | null>(null);
 	const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
 	const [weather, setWeather] = useState<string | null>(null);
+	const [trafficCam, setTrafficCam] = useState<string | null>(null);
 
 	const handleSelectLocation = (location: string) => {
 		setSelectedLocation(location);
@@ -28,8 +30,12 @@ export const Home: FC = () => {
 	const locations = getLocationService("", "");
 
 	useEffect(() => {
-		const result = selectedLocation ? getWeatherForecast("", "", selectedLocation) : "Please select a location";
-		setWeather(result);
+		const result = selectedLocation ? getWeatherForecast("", "", selectedLocation) : {
+			forecast: "Please select a location",
+			trafficCamImage: null
+		};
+		setWeather(result.forecast);
+		setTrafficCam(result.trafficCamImage);
 	}, [handleSelectLocation]);
 
 	return (
@@ -56,6 +62,13 @@ export const Home: FC = () => {
 			<div>
 				<h2>Weather Forecast:</h2>
 				{weather}
+			</div>
+
+			<div>
+				<h2>Traffic Cam:</h2>
+				{
+					trafficCam ? <Image src={trafficCam}/> : ""
+				}
 			</div>
 
 		</>
