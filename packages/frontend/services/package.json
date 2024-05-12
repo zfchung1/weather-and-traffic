@@ -1,6 +1,7 @@
 {
   "name": "@weather-and-traffic/services",
   "version": "1.0.0",
+  "main": "dist/index.js",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
