@@ -1,4 +1,4 @@
-interface Response {
+interface LocationApiResponse {
 	date: string;
 	time: string;
 	locations: {
@@ -13,7 +13,7 @@ export interface LocationData {
 	name: string;
 }
 
-const mockResponse: Response = {
+const mockResponse: LocationApiResponse = {
 	date: "2024-01-01",
 	time: "22:00:00",
 	locations: {

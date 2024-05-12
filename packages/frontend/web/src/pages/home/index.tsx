@@ -1,15 +1,17 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import type { Dayjs } from "dayjs";
 import { GenericDatePicker } from "../../components/DatePicker";
 import { GenericTimePicker } from "../../components/TimePicker";
 import { getLocationService } from "@weather-and-traffic/services/dist";
 import { NewLocationList } from "../../components/List";
+import { getWeatherForecast } from "@weather-and-traffic/services/dist";
 
 export const Home: FC = () => {
 	const [date, setDate] = useState<string>();
 	const [selectedDate, setSelectedDate] = useState<string | null>(null);
 	const [time, setTime] = useState<Dayjs | null>(null);
 	const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+	const [weather, setWeather] = useState<string | null>(null);
 
 	const handleSelectLocation = (location: string) => {
 		setSelectedLocation(location);
@@ -24,6 +26,11 @@ export const Home: FC = () => {
 	};
 
 	const locations = getLocationService("", "");
+
+	useEffect(() => {
+		const result = selectedLocation ? getWeatherForecast("", "", selectedLocation) : "Please select a location";
+		setWeather(result);
+	}, [handleSelectLocation]);
 
 	return (
 		<>
@@ -41,12 +48,15 @@ export const Home: FC = () => {
 				<h2>Select a Location:</h2>
 				<NewLocationList
 					data={locations}
-					selectedLocation = {selectedLocation}
-					onSelectLocation = {handleSelectLocation}
+					selectedLocation={selectedLocation}
+					onSelectLocation={handleSelectLocation}
 				/>
 			</div>
 
-			{locations.map((item) => item.name)}
+			<div>
+				<h2>Weather Forecast:</h2>
+				{weather}
+			</div>
 
 		</>
 	);
