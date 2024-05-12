@@ -3,11 +3,17 @@ import type { Dayjs } from "dayjs";
 import { GenericDatePicker } from "../../components/DatePicker";
 import { GenericTimePicker } from "../../components/TimePicker";
 import { getLocationService } from "@weather-and-traffic/services/dist";
+import { NewLocationList } from "../../components/List";
 
 export const Home: FC = () => {
 	const [date, setDate] = useState<string>();
 	const [selectedDate, setSelectedDate] = useState<string | null>(null);
 	const [time, setTime] = useState<Dayjs | null>(null);
+	const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+
+	const handleSelectLocation = (location: string) => {
+		setSelectedLocation(location);
+	};
 
 	const handleDateChange = (date: string) => {
 		setSelectedDate(date);
@@ -17,8 +23,7 @@ export const Home: FC = () => {
 		setTime(time);
 	};
 
-	const locationList = getLocationService("", "");
-
+	const locations = getLocationService("", "");
 
 	return (
 		<>
@@ -32,7 +37,16 @@ export const Home: FC = () => {
 				<GenericTimePicker onSelectTime={handleTimeChange} />
 			</div>
 
-			{locationList.map((item) => item.name)}
+			<div>
+				<h2>Select a Location:</h2>
+				<NewLocationList
+					data={locations}
+					selectedLocation = {selectedLocation}
+					onSelectLocation = {handleSelectLocation}
+				/>
+			</div>
+
+			{locations.map((item) => item.name)}
 
 		</>
 	);

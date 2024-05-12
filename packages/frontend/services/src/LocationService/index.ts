@@ -8,7 +8,7 @@ interface Response {
 	};
 }
 
-interface LocationData {
+export interface LocationData {
 	key: string;
 	name: string;
 }
