@@ -1,10 +1,11 @@
 {
-  "name": "@weather-and-traffic/api",
+  "name": "@weather-and-traffic-api/server",
   "version": "1.0.0",
   "main": "index.js",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon",
+    "build": "rm -rf dist && tsc"
   },
   "dependencies": {
     "cors": "^2.8.5",

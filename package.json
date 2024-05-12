@@ -15,7 +15,9 @@
   "workspaces": {
     "packages": [
       "packages/frontend/services",
-      "packages/frontend/*"
+      "packages/frontend/*",
+      "packages/api/*",
+      "packages/shared/*"
     ]
   }
 }
