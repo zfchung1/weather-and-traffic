@@ -1,7 +1,8 @@
 import { FC, useState } from "react";
-import { GenericDatePicker } from "../../components/DatePicker";
 import type { Dayjs } from "dayjs";
+import { GenericDatePicker } from "../../components/DatePicker";
 import { GenericTimePicker } from "../../components/TimePicker";
+import { getLocationService } from "@weather-and-traffic/services/dist";
 
 export const Home: FC = () => {
 	const [date, setDate] = useState<string>();
@@ -16,6 +17,8 @@ export const Home: FC = () => {
 		setTime(time);
 	};
 
+	const locationList = getLocationService("", "");
+
 
 	return (
 		<>
@@ -28,6 +31,8 @@ export const Home: FC = () => {
 				<h2>Select a Time:</h2>
 				<GenericTimePicker onSelectTime={handleTimeChange} />
 			</div>
+
+			{locationList.map((item) => item.name)}
 
 		</>
 	);

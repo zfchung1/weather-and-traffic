@@ -1,0 +1,1 @@
+export { getLocationService } from "./LocationService";
