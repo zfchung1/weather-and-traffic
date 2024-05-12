@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "build": "yarn workspaces run build",
-    "start": "concurrently -c -n web,components,services,types,server \"npm run start -w packages/frontend/web\" \"npm run start -w ./packages/frontend/components\" \"npm run start -w ./packages/frontend/services\" \"npm run start -w ./packages/frontend/types\" \"npm run start -w packages/api/server\"",
+    "start": "yarn workspace @weather-and-traffic/web start",
     "clean": "rm -rf node_modules ./packages/*/*/{dist,node_modules,build,coverage,storybook-static}",
     "reset": "yarn clean && yarn && yarn build"
   },
