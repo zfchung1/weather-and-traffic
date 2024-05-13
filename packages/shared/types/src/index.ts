@@ -20,4 +20,4 @@ export type HourMinute = `${hoursRange}:${minutesRange}`;
 export type HourMinuteSecond = `${HourMinute}:${secondsRange}`;
 
 // `${YearMonthDate}T${HourMinuteSecond}` throws error TS2590
-export type partialIsoString = `${YearMonthDate}T${string}`;
+export type partialIsoString = `${string}T${HourMinuteSecond}`;

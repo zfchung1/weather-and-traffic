@@ -1,13 +1,17 @@
-import { getTrafficCamData, getTrafficCams } from "@weather-and-traffic-api/data";
-import { getWeatherForecast, getGeoLocationData } from "@weather-and-traffic-api/data";
+import { getTrafficCams } from "@weather-and-traffic-api/data";
+import { getGeoLocationData } from "@weather-and-traffic-api/data";
 import { findNearest } from "geolib";
 import { GeoLocation } from "@weather-and-traffic-api/data";
+import { HourMinute, partialIsoString } from "@weather-and-traffic-shared/types";
 
-const fakeDateTime = "2020-04-26T01:01:00";
+function toPartialIsoString(date: string, time: HourMinute) {
+	 return `${date}T${time}:00` as partialIsoString;
+}
 
-export function getLocations(date: string, time: string) {
-	const trafficCams = getTrafficCams(fakeDateTime);
-	const geoLocations = getGeoLocationData();
+export async function getLocations(date: string, time: HourMinute) {
+	const partialIsoDateTime = toPartialIsoString(date, time);
+	const trafficCams = await getTrafficCams(partialIsoDateTime);
+	const geoLocations = await getGeoLocationData(partialIsoDateTime);
 
 	const data = trafficCams.map((trafficCam) => {
 		const nearestLocation = findNearest(trafficCam.coordinate, geoLocations);

@@ -1,3 +1,3 @@
-export { getTrafficCams, getTrafficCamData } from "./trafficImages";
-export { getGeoLocationData, getWeatherForecast } from "./weather";
+export { getTrafficCams } from "./trafficImages";
+export { getGeoLocationData } from "./weather";
 export { GeoLocation } from "./weather/types";
