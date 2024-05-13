@@ -1,2 +1,2 @@
-export { getLocationService } from "./LocationService";
+export { getLocations } from "./LocationService";
 export { getWeatherForecast } from "./WeatherService";

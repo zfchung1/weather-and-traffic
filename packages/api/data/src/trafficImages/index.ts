@@ -99,15 +99,60 @@ const mockTrafficData: ITrafficImages = {
 	}
 };
 
-export function getTrafficImageData(dateTime: partialIsoString) {
+export function getTrafficCamData(dateTime: partialIsoString) {
 	return mockTrafficData.items[0].cameras.map((camera) => {
 		return {
-			image: camera.image,
-			location: camera.location,
-			imageMetadata: {
+			id: camera.camera_id,
+			coordinate: camera.location,
+			image: {
+				url: camera.image,
 				height: camera.image_metadata.height,
 				width: camera.image_metadata.width
 			}
-		}
-	})
+		};
+	});
 }
+
+export function getTrafficCams(dateTime: partialIsoString) {
+	return mockTrafficData.items[0].cameras.map((camera) => {
+		return {
+			cameraId: camera.camera_id,
+			coordinate: camera.location
+		};
+	});
+}
+
+
+const arr1 = [
+	{
+		cameraId: "1001",
+		coordinate: {
+			longitude: 1111,
+			latitude: 22222
+		}
+	},
+	{
+		cameraId: "1002",
+		coordinate: {
+			longitude: 1111,
+			latitude: 22222
+		}
+	}
+];
+
+const arr2 = [
+	{
+		areaName: "Ang Mo Kio",
+		coordinate: {
+			"latitude": 1.375,
+			"longitude": 103.839
+		}
+	},
+	{
+		areaName: "Bedok",
+		coordinate: {
+			"latitude": 1.321,
+			"longitude": 103.924
+		}
+	},
+]

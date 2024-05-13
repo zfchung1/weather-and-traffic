@@ -26,7 +26,7 @@ const mockResponse: LocationApiResponse = {
 	}
 };
 
-export const getLocationService = (
+export const getLocations = (
 	date: string,
 	time: string
 ): LocationData[] => {

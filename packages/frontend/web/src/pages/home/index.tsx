@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import type { Dayjs } from "dayjs";
 import { GenericDatePicker } from "../../components/DatePicker";
 import { GenericTimePicker } from "../../components/TimePicker";
-import { getLocationService } from "@weather-and-traffic/services";
+import { getLocations } from "@weather-and-traffic/services";
 import { NewLocationList } from "../../components/List";
 import { getWeatherForecast } from "@weather-and-traffic/services";
 import { Image } from "antd";
@@ -27,7 +27,7 @@ export const Home: FC = () => {
 		setTime(time);
 	};
 
-	const locations = getLocationService("", "");
+	const locations = getLocations("", "");
 
 	useEffect(() => {
 		const result = selectedLocation ? getWeatherForecast("", "", selectedLocation) : {

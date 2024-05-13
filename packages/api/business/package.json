@@ -1,13 +1,10 @@
 {
-  "name": "@weather-and-traffic-api/data",
+  "name": "@weather-and-traffic-api/business",
   "version": "1.0.0",
   "main": "dist/index.js",
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
     "build": "rm -rf dist && tsc"
-  },
-  "dependencies": {
-    "geolib": "^3.3.4"
   }
 }

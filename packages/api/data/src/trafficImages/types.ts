@@ -1,10 +1,12 @@
+import { GeoCoordinates } from "../types";
+
 export interface ITrafficImages {
 	items: {
 		timestamp: string;
 		cameras: {
 			timestamp: string;
 			image: string;
-			location: GeoLocation;
+			location: GeoCoordinates;
 			camera_id: string;
 			image_metadata: ImageMetadata
 		}[]
@@ -12,11 +14,6 @@ export interface ITrafficImages {
 	api_info: {
 		status: string;
 	};
-}
-
-export interface GeoLocation {
-	latitude: number;
-	longitude: number;
 }
 
 interface ImageMetadata {
