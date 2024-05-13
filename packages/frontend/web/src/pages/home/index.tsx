@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import { useAsync } from "react-use";
 import type { Dayjs } from "dayjs";
 import { GenericDatePicker } from "../../components/DatePicker";
 import { GenericTimePicker } from "../../components/TimePicker";
@@ -27,7 +28,16 @@ export const Home: FC = () => {
 		setTime(time);
 	};
 
-	const locations = getLocations("", "");
+	const { value: location } = useAsync(async() => {
+		const mockDate = "2020-01-01";
+		const mockTime = "01:01";
+		try {
+			return await getLocations(mockDate, mockTime);
+		} catch (e) {
+			console.error(e); //NOSONAR
+			throw e;
+		}
+	}, [])
 
 	useEffect(() => {
 		const result = selectedLocation ? getWeatherForecast("", "", selectedLocation) : {
@@ -53,7 +63,7 @@ export const Home: FC = () => {
 			<div>
 				<h2>Select a Location:</h2>
 				<NewLocationList
-					data={locations}
+					data={location ? location : []}
 					selectedLocation={selectedLocation}
 					onSelectLocation={handleSelectLocation}
 				/>

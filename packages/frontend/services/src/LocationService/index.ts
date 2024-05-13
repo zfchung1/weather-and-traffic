@@ -1,34 +1,25 @@
-interface LocationApiResponse {
-	date: string;
-	time: string;
-	locations: {
-		[key: string]: {
-			name: string;
-		};
-	};
-}
+import { HourMinute, LocationList, LocationListData, YearMonthDate } from "@weather-and-traffic-shared/types";
 
-export interface LocationData {
-	key: string;
-	name: string;
-}
+async function getLocationData(date: YearMonthDate, time: HourMinute) {
+	const locationsApiUrl = "http://localhost:9000/locations";
+	const query = `?date=${date}&time=${time}`;
 
-const mockResponse: LocationApiResponse = {
-	date: "2024-01-01",
-	time: "22:00:00",
-	locations: {
-		"ang_mo_kio": {
-			name: "Ang Mo Kio"
-		},
-		"bedok": {
-			name: "Bedok"
+	try {
+		const response = await fetch(locationsApiUrl + query);
+		if (!response.ok) {
+			// do something
 		}
+		return await response.json() as LocationList;
+	} catch (error) {
+		console.error("Error fetching data:", error);
+		throw error;
 	}
-};
+}
 
-export const getLocations = (
-	date: string,
-	time: string
-): LocationData[] => {
-	return Object.entries(mockResponse.locations).map(([key, value]) => ({ key, name: value.name }));
+export const getLocations = async (
+	date: YearMonthDate,
+	time: HourMinute
+): Promise<LocationListData[]> => {
+	const locationData = await getLocationData(date, time);
+	return locationData.data;
 };

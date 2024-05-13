@@ -21,3 +21,20 @@ export type HourMinuteSecond = `${HourMinute}:${secondsRange}`;
 
 // `${YearMonthDate}T${HourMinuteSecond}` throws error TS2590
 export type partialIsoString = `${string}T${HourMinuteSecond}`;
+
+export interface LocationList {
+	date: YearMonthDate;
+	time: HourMinute;
+	data: LocationListData[]
+}
+
+export interface GeoCoordinates {
+	latitude: number;
+	longitude: number;
+}
+
+export interface LocationListData {
+	cameraId: string
+	locationName: string,
+	coordinate: GeoCoordinates
+}

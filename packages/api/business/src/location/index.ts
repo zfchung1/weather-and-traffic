@@ -2,13 +2,14 @@ import { getTrafficCams } from "@weather-and-traffic-api/data";
 import { getGeoLocationData } from "@weather-and-traffic-api/data";
 import { findNearest } from "geolib";
 import { GeoLocation } from "@weather-and-traffic-api/data";
-import { HourMinute, partialIsoString } from "@weather-and-traffic-shared/types";
+import { HourMinute, LocationList, partialIsoString, YearMonthDate } from "@weather-and-traffic-shared/types";
 
-function toPartialIsoString(date: string, time: HourMinute) {
-	 return `${date}T${time}:00` as partialIsoString;
+function toPartialIsoString(date: YearMonthDate, time: HourMinute) {
+	// TS2590: Expression produces a union type that is too complex to represent.
+	return `${date as string}T${time}:00` as partialIsoString;
 }
 
-export async function getLocations(date: string, time: HourMinute) {
+export async function getLocations(date: YearMonthDate, time: HourMinute): Promise<LocationList> {
 	const partialIsoDateTime = toPartialIsoString(date, time);
 	const trafficCams = await getTrafficCams(partialIsoDateTime);
 	const geoLocations = await getGeoLocationData(partialIsoDateTime);

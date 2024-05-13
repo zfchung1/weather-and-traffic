@@ -1,8 +1,8 @@
 import { Card, List } from "antd";
-import { LocationData } from "@weather-and-traffic/services/dist/LocationService";
+import { LocationListData } from "@weather-and-traffic-shared/types";
 
 interface IProps {
-	data: LocationData[];
+	data: LocationListData[];
 	selectedLocation: string | null;
 	onSelectLocation: (value: string) => void;
 }
@@ -15,11 +15,12 @@ export const NewLocationList = ({ data, selectedLocation, onSelectLocation }: IP
 			renderItem={(item, index) => (
 				<List.Item>
 					<Card
-						onClick={() => onSelectLocation(item.key)}
+						onClick={() => onSelectLocation(item.cameraId)}
 						hoverable
-						style={{ cursor: "pointer", border: item.key === selectedLocation ? "2px solid blue" : "none" }}
+						style={{ cursor: "pointer", border: item.cameraId === selectedLocation ? "2px solid blue" : "none" }}
 					>
-						{item.name}
+						{item.locationName}
+						{item.cameraId}
 					</Card>
 				</List.Item>
 			)}

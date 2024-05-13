@@ -1,4 +1,4 @@
-import { GeoCoordinates } from "../types";
+import { GeoCoordinates } from "@weather-and-traffic-shared/types";
 
 export interface IWeatherForecast {
 	area_metadata: {

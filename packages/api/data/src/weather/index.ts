@@ -2,7 +2,7 @@ import { GeoLocation, IWeatherForecast } from "./types";
 import { partialIsoString } from "@weather-and-traffic-shared/types";
 
 async function newGetWeatherData(dateTime: partialIsoString) {
-	const trafficCamApiUrl = "https://api.data.gov.sg/v1/environment/2-hour-weather-forecast?";
+	const trafficCamApiUrl = "https://api.data.gov.sg/v1/environment/2-hour-weather-forecast";
 	const query = `?date_time=${encodeURIComponent(dateTime)}`;
 
 	try {
