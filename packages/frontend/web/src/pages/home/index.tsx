@@ -1,15 +1,15 @@
 import { FC, useEffect, useState } from "react";
-import type { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { GenericDatePicker } from "../../components/DatePicker";
 import { GenericTimePicker } from "../../components/TimePicker";
 import { getWeatherForecast } from "@weather-and-traffic/services";
 import { Image } from "antd";
 import { LocationWrapper } from "../../components/LocationWrapper";
+import { HourMinute, YearMonthDate } from "@weather-and-traffic-shared/types";
 
 export const Home: FC = () => {
-	const [date, setDate] = useState<string>();
-	const [selectedDate, setSelectedDate] = useState<string | null>(null);
-	const [time, setTime] = useState<Dayjs | null>(null);
+	const [selectedDate, setSelectedDate] = useState<YearMonthDate | null>(null);
+	const [selectedTime, setSelectedTime] = useState<HourMinute | null>(null);
 	const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
 	const [weather, setWeather] = useState<string | null>(null);
 	const [trafficCam, setTrafficCam] = useState<string | null>(null);
@@ -18,16 +18,15 @@ export const Home: FC = () => {
 		setSelectedLocation(location);
 	};
 
-	const handleDateChange = (date: string) => {
-		setSelectedDate(date);
+	const handleDateChange = (date: Dayjs) => {
+		const formattedDate = date ? dayjs(date).format("YYYY-MM-DD"): null;
+		setSelectedDate(formattedDate as YearMonthDate);
 	};
 
 	const handleTimeChange = (time: Dayjs) => {
-		setTime(time);
+		const formattedTime = time? dayjs(time).format("HH:mm"): null;
+		setSelectedTime(formattedTime as HourMinute);
 	};
-
-	const mockDate = "2020-01-01";
-	const mockTime = "01:01";
 
 	useEffect(() => {
 		const result = selectedLocation ? getWeatherForecast("", "", selectedLocation) : {
@@ -53,8 +52,8 @@ export const Home: FC = () => {
 			<div>
 				<h2>Select a Location:</h2>
 				<LocationWrapper
-					date={mockDate}
-					time={mockTime}
+					date={selectedDate}
+					time={selectedTime}
 					selectedLocation={selectedLocation}
 					onSelectLocation={handleSelectLocation}
 				/>

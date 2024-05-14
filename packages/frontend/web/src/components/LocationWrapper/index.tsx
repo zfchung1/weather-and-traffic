@@ -5,8 +5,8 @@ import { getLocations } from "@weather-and-traffic/services";
 import { NewLocationList } from "../List";
 
 interface IProps {
-	date: YearMonthDate;
-	time: HourMinute;
+	date: YearMonthDate | null;
+	time: HourMinute | null;
 	selectedLocation: string | null;
 	onSelectLocation: (value: string) => void;
 }
@@ -22,7 +22,7 @@ export const LocationWrapper: FC<IProps> = (
 
 	const { value: locations } = useAsync(async () => {
 		try {
-			return await getLocations(date, time);
+			return date && time ? await getLocations(date, time) : [];
 		} catch (e) {
 			console.error(e);
 			throw e;
