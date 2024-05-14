@@ -17,8 +17,12 @@ const mockData: WeatherApiResponse = {
 	date: "",
 	time: "",
 	result: {
-		"ang_mo_kio": {
+		"3705": {
 			forecast: "Light Showers",
+			trafficCamImage: "https://images.data.gov.sg/api/traffic-images/2024/05/0806f8bb-f1b4-4e9e-a672-797ab4c1a122.jpg"
+		},
+		"1006": {
+			forecast: "Cloudy",
 			trafficCamImage: "https://images.data.gov.sg/api/traffic-images/2024/05/0806f8bb-f1b4-4e9e-a672-797ab4c1a122.jpg"
 		}
 	}

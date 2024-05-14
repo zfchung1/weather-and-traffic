@@ -1,12 +1,10 @@
 import { FC, useEffect, useState } from "react";
-import { useAsync } from "react-use";
 import type { Dayjs } from "dayjs";
 import { GenericDatePicker } from "../../components/DatePicker";
 import { GenericTimePicker } from "../../components/TimePicker";
-import { getLocations } from "@weather-and-traffic/services";
-import { NewLocationList } from "../../components/List";
 import { getWeatherForecast } from "@weather-and-traffic/services";
 import { Image } from "antd";
+import { LocationWrapper } from "../../components/LocationWrapper";
 
 export const Home: FC = () => {
 	const [date, setDate] = useState<string>();
@@ -28,16 +26,8 @@ export const Home: FC = () => {
 		setTime(time);
 	};
 
-	const { value: location } = useAsync(async() => {
-		const mockDate = "2020-01-01";
-		const mockTime = "01:01";
-		try {
-			return await getLocations(mockDate, mockTime);
-		} catch (e) {
-			console.error(e); //NOSONAR
-			throw e;
-		}
-	}, [])
+	const mockDate = "2020-01-01";
+	const mockTime = "01:01";
 
 	useEffect(() => {
 		const result = selectedLocation ? getWeatherForecast("", "", selectedLocation) : {
@@ -62,8 +52,9 @@ export const Home: FC = () => {
 
 			<div>
 				<h2>Select a Location:</h2>
-				<NewLocationList
-					data={location ? location : []}
+				<LocationWrapper
+					date={mockDate}
+					time={mockTime}
 					selectedLocation={selectedLocation}
 					onSelectLocation={handleSelectLocation}
 				/>
@@ -77,7 +68,7 @@ export const Home: FC = () => {
 			<div>
 				<h2>Traffic Cam:</h2>
 				{
-					trafficCam ? <Image src={trafficCam}/> : ""
+					trafficCam ? <Image src={trafficCam} /> : ""
 				}
 			</div>
 
