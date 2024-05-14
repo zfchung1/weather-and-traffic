@@ -25,7 +25,7 @@ export type partialIsoString = `${string}T${HourMinuteSecond}`;
 export interface LocationList {
 	date: YearMonthDate;
 	time: HourMinute;
-	data: LocationListData[]
+	data: LocationListData[];
 }
 
 export interface GeoCoordinates {
@@ -38,21 +38,11 @@ export interface LocationListData {
 	locationName: string;
 	coordinate: GeoCoordinates;
 	forecast: string;
+	image: ImageData;
 }
 
-export interface WeatherList {
-	date: YearMonthDate;
-	time: HourMinute;
-	data: WeatherListData;
-}
-
-export interface WeatherListData {
-	locationName: string;
-	coordinates: GeoCoordinates;
-	forecast: string;
-	image: {
-		url: string;
-		height: number;
-		width: number;
-	}
+export interface ImageData {
+	url: string;
+	height: number;
+	width: number;
 }

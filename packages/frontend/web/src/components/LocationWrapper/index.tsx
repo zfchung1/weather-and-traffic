@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from "react";
-import { HourMinute, YearMonthDate } from "@weather-and-traffic-shared/types";
+import { HourMinute, LocationListData, YearMonthDate } from "@weather-and-traffic-shared/types";
 import { useAsync } from "react-use";
 import { getLocations } from "@weather-and-traffic/services";
 import { NewLocationList } from "../List";
@@ -7,8 +7,8 @@ import { NewLocationList } from "../List";
 interface IProps {
 	date: YearMonthDate | null;
 	time: HourMinute | null;
-	selectedLocation: string | null;
-	onSelectLocation: (value: string) => void;
+	selectedLocation: LocationListData | null;
+	onSelectLocation: (location: LocationListData) => void;
 }
 
 export const LocationWrapper: FC<IProps> = (

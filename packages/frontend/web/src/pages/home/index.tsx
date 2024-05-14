@@ -2,39 +2,36 @@ import { FC, useEffect, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { GenericDatePicker } from "../../components/DatePicker";
 import { GenericTimePicker } from "../../components/TimePicker";
-import { getWeatherForecast } from "@weather-and-traffic/services";
 import { Image } from "antd";
 import { LocationWrapper } from "../../components/LocationWrapper";
-import { HourMinute, YearMonthDate } from "@weather-and-traffic-shared/types";
+import { HourMinute, ImageData, LocationListData, YearMonthDate } from "@weather-and-traffic-shared/types";
 
 export const Home: FC = () => {
 	const [selectedDate, setSelectedDate] = useState<YearMonthDate | null>(null);
 	const [selectedTime, setSelectedTime] = useState<HourMinute | null>(null);
-	const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+	const [selectedLocation, setSelectedLocation] = useState<LocationListData | null>(null);
 	const [weather, setWeather] = useState<string | null>(null);
-	const [trafficCam, setTrafficCam] = useState<string | null>(null);
+	const [trafficCam, setTrafficCam] = useState<ImageData | null>(null);
 
-	const handleSelectLocation = (location: string) => {
+	const handleSelectLocation = (location: LocationListData) => {
 		setSelectedLocation(location);
 	};
 
 	const handleDateChange = (date: Dayjs) => {
-		const formattedDate = date ? dayjs(date).format("YYYY-MM-DD"): null;
+		const formattedDate = date ? dayjs(date).format("YYYY-MM-DD") : null;
 		setSelectedDate(formattedDate as YearMonthDate);
 	};
 
 	const handleTimeChange = (time: Dayjs) => {
-		const formattedTime = time? dayjs(time).format("HH:mm"): null;
+		const formattedTime = time ? dayjs(time).format("HH:mm") : null;
 		setSelectedTime(formattedTime as HourMinute);
 	};
 
 	useEffect(() => {
-		const result = selectedLocation ? getWeatherForecast("", "", selectedLocation) : {
-			forecast: "Please select a location",
-			trafficCamImage: null
-		};
-		setWeather(result.forecast);
-		setTrafficCam(result.trafficCamImage);
+		if (selectedLocation) {
+			setWeather(selectedLocation.forecast);
+			setTrafficCam(selectedLocation.image);
+		}
 	}, [handleSelectLocation]);
 
 	return (
@@ -67,7 +64,7 @@ export const Home: FC = () => {
 			<div>
 				<h2>Traffic Cam:</h2>
 				{
-					trafficCam ? <Image src={trafficCam} /> : ""
+					trafficCam ? <Image src={trafficCam.url} /> : ""
 				}
 			</div>
 

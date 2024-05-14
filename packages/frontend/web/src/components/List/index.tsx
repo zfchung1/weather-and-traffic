@@ -3,8 +3,8 @@ import { LocationListData } from "@weather-and-traffic-shared/types";
 
 interface IProps {
 	data: LocationListData[];
-	selectedLocation: string | null;
-	onSelectLocation: (value: string) => void;
+	selectedLocation: LocationListData | null;
+	onSelectLocation: (value: LocationListData) => void;
 }
 
 export const NewLocationList = ({ data, selectedLocation, onSelectLocation }: IProps) => {
@@ -15,9 +15,9 @@ export const NewLocationList = ({ data, selectedLocation, onSelectLocation }: IP
 			renderItem={(item, index) => (
 				<List.Item>
 					<Card
-						onClick={() => onSelectLocation(item.cameraId)}
+						onClick={() => onSelectLocation(item)}
 						hoverable
-						style={{ cursor: "pointer", border: item.cameraId === selectedLocation ? "2px solid blue" : "none" }}
+						style={{ cursor: "pointer", border: item.cameraId === selectedLocation?.cameraId ? "2px solid blue" : "none" }}
 					>
 						{item.locationName}
 						{item.cameraId}
