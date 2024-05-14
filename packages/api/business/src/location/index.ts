@@ -20,7 +20,9 @@ export async function getLocations(date: YearMonthDate, time: HourMinute): Promi
 		return {
 			cameraId: trafficCam.cameraId,
 			locationName: location.areaName,
-			coordinate: trafficCam.coordinate
+			coordinate: trafficCam.coordinate,
+			forecast: location.forecast,
+			image: trafficCam.image
 		};
 	});
 

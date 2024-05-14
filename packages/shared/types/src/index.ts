@@ -34,7 +34,25 @@ export interface GeoCoordinates {
 }
 
 export interface LocationListData {
-	cameraId: string
-	locationName: string,
-	coordinate: GeoCoordinates
+	cameraId: string;
+	locationName: string;
+	coordinate: GeoCoordinates;
+	forecast: string;
+}
+
+export interface WeatherList {
+	date: YearMonthDate;
+	time: HourMinute;
+	data: WeatherListData;
+}
+
+export interface WeatherListData {
+	locationName: string;
+	coordinates: GeoCoordinates;
+	forecast: string;
+	image: {
+		url: string;
+		height: number;
+		width: number;
+	}
 }

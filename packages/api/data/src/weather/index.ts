@@ -19,11 +19,17 @@ async function newGetWeatherData(dateTime: partialIsoString) {
 
 export async function getGeoLocationData(dateTime: partialIsoString): Promise<GeoLocation[]> {
 	const weatherData = await newGetWeatherData(dateTime);
+	const normalizedForecasts = weatherData.items[0].forecasts.reduce((final, { area, forecast }) => {
+		final[area] = { forecast };
+		return final;
+	}, {} as { [key: string]: { forecast: string } });
 	return weatherData.area_metadata.map((area) => {
 		return {
 			areaName: area.name,
 			longitude: area.label_location.longitude,
-			latitude: area.label_location.latitude
+			latitude: area.label_location.latitude,
+			forecast: normalizedForecasts[area.name].forecast
 		};
 	});
 }
+

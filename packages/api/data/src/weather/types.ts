@@ -26,4 +26,5 @@ export interface GeoLocation {
 	areaName: string;
 	longitude: number;
 	latitude: number;
+	forecast: string;
 }

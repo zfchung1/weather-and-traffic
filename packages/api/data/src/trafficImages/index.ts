@@ -37,7 +37,12 @@ export async function getTrafficCams(dateTime: partialIsoString) {
 	return trafficCamData.items[0].cameras.map((camera) => {
 		return {
 			cameraId: camera.camera_id,
-			coordinate: camera.location
+			coordinate: camera.location,
+			image: {
+				url: camera.image,
+				height: camera.image_metadata.height,
+				width: camera.image_metadata.width
+			}
 		};
 	});
 }
