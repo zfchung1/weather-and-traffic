@@ -5,9 +5,12 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "build": "rm -rf dist && tsc"
+    "build": "rm -rf dist && tsc",
+    "db-migration:make": "knex migrate:make --env production",
+    "db-migration:migrate": "knex migrate:latest --env production"
   },
   "dependencies": {
-    "geolib": "^3.3.4"
+    "knex": "^3.1.0",
+    "pg": "^8.11.5"
   }
 }

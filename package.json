@@ -10,7 +10,9 @@
     "build": "yarn workspaces run build",
     "start": "yarn workspace @weather-and-traffic/web start",
     "clean": "rm -rf node_modules ./packages/*/*/{dist,node_modules,build,coverage,storybook-static}",
-    "reset": "yarn clean && yarn && yarn build"
+    "reset": "yarn clean && yarn && yarn build",
+    "db-migration:make": "yarn workspace @weather-and-traffic-api/data db-migration:make",
+    "db-migration:migrate": "dotenv yarn workspace @weather-and-traffic-api/data db-migration:migrate"
   },
   "workspaces": {
     "packages": [
@@ -19,5 +21,9 @@
       "packages/api/*",
       "packages/shared/*"
     ]
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5",
+    "dotenv-cli": "^7.4.2"
   }
 }

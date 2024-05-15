@@ -6,5 +6,8 @@
   "private": true,
   "scripts": {
     "build": "rm -rf dist && tsc"
+  },
+  "dependencies": {
+    "geolib": "^3.3.4"
   }
 }
