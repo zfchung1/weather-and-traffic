@@ -5,6 +5,7 @@ import { GenericTimePicker } from "../../components/TimePicker";
 import { Image } from "antd";
 import { LocationWrapper } from "../../components/LocationWrapper";
 import { HourMinute, ImageData, LocationListData, YearMonthDate } from "@weather-and-traffic-shared/types";
+import { useLocalStorage } from "react-use";
 
 export const Home: FC = () => {
 	const [selectedDate, setSelectedDate] = useState<YearMonthDate | null>(null);
@@ -12,6 +13,11 @@ export const Home: FC = () => {
 	const [selectedLocation, setSelectedLocation] = useState<LocationListData | null>(null);
 	const [weather, setWeather] = useState<string | null>(null);
 	const [trafficCam, setTrafficCam] = useState<ImageData | null>(null);
+	const [value, setValue, remove] = useLocalStorage("mostRecentSearch", {
+		selectedDate,
+		selectedTime,
+		selectedLocation
+	});
 
 	const handleSelectLocation = (location: LocationListData) => {
 		setSelectedLocation(location);
@@ -31,6 +37,11 @@ export const Home: FC = () => {
 		if (selectedLocation) {
 			setWeather(selectedLocation.forecast);
 			setTrafficCam(selectedLocation.image);
+			setValue({
+				selectedDate,
+				selectedTime,
+				selectedLocation
+			});
 		}
 	}, [handleSelectLocation]);
 
@@ -44,6 +55,11 @@ export const Home: FC = () => {
 			<div>
 				<h2>Select a Time:</h2>
 				<GenericTimePicker onSelectTime={handleTimeChange} />
+			</div>
+
+			<div>
+				<h3>Most recent search:</h3>
+				{ value ? value.selectedLocation?.locationName : ""}
 			</div>
 
 			<div>
