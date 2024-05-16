@@ -5,7 +5,8 @@ import { GenericTimePicker } from "../../components/TimePicker";
 import { Image } from "antd";
 import { LocationWrapper } from "../../components/LocationWrapper";
 import { HourMinute, ImageData, LocationListData, YearMonthDate } from "@weather-and-traffic-shared/types";
-import { useLocalStorage } from "react-use";
+import { useAsync, useLocalStorage } from "react-use";
+import { getLocations, getRecentSearch } from "@weather-and-traffic/services";
 
 export const Home: FC = () => {
 	const [selectedDate, setSelectedDate] = useState<YearMonthDate | null>(null);
@@ -45,6 +46,16 @@ export const Home: FC = () => {
 		}
 	}, [handleSelectLocation]);
 
+	const { value: recentSearch } = useAsync(async () => {
+		const latestFiveRecords = 5;
+		try {
+			return await getRecentSearch(latestFiveRecords);
+		} catch (e) {
+			console.error(e);
+			throw e;
+		}
+	}, []);
+
 	return (
 		<>
 			<div>
@@ -58,8 +69,14 @@ export const Home: FC = () => {
 			</div>
 
 			<div>
-				<h3>Most recent search:</h3>
-				{ value ? value.selectedLocation?.locationName : ""}
+				<h3>Most recent search by user:</h3>
+				{value ? value.selectedLocation?.locationName : ""}
+
+				<h3>Most recent search by other people:</h3>
+				{recentSearch? recentSearch.map(item => {
+					return <p>{item.location}</p>
+				}) : "No Recent Search by other people"}
+
 			</div>
 
 			<div>

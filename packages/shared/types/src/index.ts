@@ -46,3 +46,9 @@ export interface ImageData {
 	height: number;
 	width: number;
 }
+
+export interface SearchRecordData {
+	searchDate: Date;
+	location: string;
+	cameraId: string;
+}

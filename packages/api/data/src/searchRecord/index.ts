@@ -14,7 +14,6 @@ export async function getSearchRecord(limit: number) {
 
 	try {
 		const searchRecordTable = getDBClient<SearchRecordDb>("search_record");
-		console.log(searchRecordTable);
 
 		const latestRecords = await searchRecordTable
 			.select("search_date", "location", "camera_id")
