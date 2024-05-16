@@ -80,7 +80,8 @@ export const Home: FC = () => {
 			}}>
 				<div style={{
 					flex: 1,
-					padding: 10
+					padding: 10,
+					margin: 5
 				}}>
 					<h2>Select a Date:</h2>
 					<GenericDatePicker onSelectDate={handleDateChange} />
@@ -88,7 +89,8 @@ export const Home: FC = () => {
 
 				<div style={{
 					flex: 1,
-					padding: 10
+					padding: 10,
+					margin: 5
 				}}>
 					<h2>Select a Time:</h2>
 					<GenericTimePicker onSelectTime={handleTimeChange} />
@@ -97,12 +99,12 @@ export const Home: FC = () => {
 			</div>
 
 			<div style={{ display: "flex" }}>
-				<div style={{ flex: 1, padding: 10 }}>
+				<div style={{ flex: 1, padding: 10, margin: 5 }}>
 					<h3>Most recent search by user:</h3>
 					{value ? value.selectedLocation?.locationName : ""}
 				</div>
 
-				<div style={{ flex: 1, padding: 10 }}>
+				<div style={{ flex: 1, padding: 10, margin: 5 }}>
 					<h3>Most recent search by other people:</h3>
 					{recentSearch ? recentSearch.map(item => {
 						return <p>{item.location}</p>;

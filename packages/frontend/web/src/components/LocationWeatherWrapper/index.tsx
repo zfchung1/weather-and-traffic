@@ -26,11 +26,11 @@ export const LocationWeatherWrapper: FC<IProps> = (
 		? { display: "block" }
 		: { display: "flex" };
 	const locationStyle = isMobile
-		? {}
-		: { flex: 2, padding: 10 };
+		? { padding: 10, margin: 5 }
+		: { flex: 2, padding: 10, margin: 5 };
 	const weatherStyle = isMobile
-		? {}
-		: { flex: 1, padding: 10 };
+		? { padding: 10, margin: 5, background: "aliceblue" }
+		: { flex: 1, padding: 10, margin: 5, background: "aliceblue" };
 
 	return (
 		<>
@@ -49,7 +49,7 @@ export const LocationWeatherWrapper: FC<IProps> = (
 
 					<div style={weatherStyle}>
 						<h2>Weather Forecast:</h2>
-						{weather}
+						{weather ? weather : <br />}
 					</div>
 				</div>
 			}
