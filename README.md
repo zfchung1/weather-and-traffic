@@ -27,11 +27,11 @@ Features:
    b. Create an api to retrieve the top 10 date time + location searched within a period. c. Create an api to retrieve
    the period of which there are most searches performed.
 
+Incomplete Features:
+
+
 ## Assumptions and Interpretations
 
-[List any assumptions you have made about the requirements.]
-[Include any interpretations you have made regarding the provided instructions.]
-[Add notes on architecture decisions and why certain approaches were chosen.]
 
 ## Getting Started
 

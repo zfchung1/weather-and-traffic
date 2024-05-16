@@ -4,7 +4,8 @@ import { join } from "path";
 import { checkUndefinedOrNull } from "@weather-and-traffic-shared/helper";
 
 function configureClient() {
-	const sslConfig = { ca: readFileSync(join(__dirname, "../../../../../cert/ap-southeast-1-bundle.pem")) };
+	// Uncomment if required for direct db connect (for testing purpose only, not for production)
+	// const sslConfig = { ca: readFileSync(join(__dirname, "../../../../../cert/ap-southeast-1-bundle.pem")) };
 	const dbClient = knex({
 		client: "pg",
 		connection: {
@@ -13,7 +14,7 @@ function configureClient() {
 			user: process.env.DB_USER,
 			password: process.env.DB_PASSWORD,
 			database: process.env.DB_NAME,
-			ssl: sslConfig
+			// ssl: sslConfig
 		},
 		pool: {
 			idleTimeoutMillis: 30000,
