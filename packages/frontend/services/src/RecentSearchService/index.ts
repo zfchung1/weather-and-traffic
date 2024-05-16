@@ -1,7 +1,7 @@
 import { SearchRecordData } from "@weather-and-traffic-shared/types";
 
 export async function getRecentSearch(limit: number) {
-	const locationsApiUrl = "http://localhost:9000/recent-search";
+	const locationsApiUrl = "http://localhost:9001/recent-search";
 	const query = `?limit=${limit}`;
 
 	try {

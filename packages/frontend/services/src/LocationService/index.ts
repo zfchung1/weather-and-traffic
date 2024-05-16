@@ -1,7 +1,7 @@
 import { HourMinute, LocationList, LocationListData, YearMonthDate } from "@weather-and-traffic-shared/types";
 
 async function getLocationData(date: YearMonthDate, time: HourMinute) {
-	const locationsApiUrl = "http://localhost:9000/locations";
+	const locationsApiUrl = "http://localhost:9001/locations";
 	const query = `?date=${date}&time=${time}`;
 
 	try {

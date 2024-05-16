@@ -19,6 +19,7 @@ async function newGetWeatherData(dateTime: partialIsoString) {
 
 export async function getGeoLocationData(dateTime: partialIsoString): Promise<GeoLocation[]> {
 	const weatherData = await newGetWeatherData(dateTime);
+	//TODO: '2022-01-01T10:01:00' return  { items: [ {} ], area_metadata: [], api_info: { status: 'healthy' } }
 	const normalizedForecasts = weatherData.items[0].forecasts.reduce((final, { area, forecast }) => {
 		final[area] = { forecast };
 		return final;
