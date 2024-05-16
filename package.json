@@ -9,6 +9,7 @@
   "scripts": {
     "build": "yarn workspaces run build",
     "start": "dotenv concurrently \"yarn workspace @weather-and-traffic-api/server-nest start:prod\" \"yarn workspace @weather-and-traffic/web start\"",
+    "start:express": "dotenv concurrently \"yarn workspace @weather-and-traffic-api/server-nest start:prod\" \"yarn workspace @weather-and-traffic/web start\"",
     "clean": "rm -rf node_modules ./packages/*/*/{dist,node_modules,build,coverage}",
     "reset": "yarn clean && yarn && yarn build",
     "db-migration:make": "yarn workspace @weather-and-traffic-api/data db-migration:make",
