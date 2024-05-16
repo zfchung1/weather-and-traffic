@@ -6,7 +6,7 @@ import { Image } from "antd";
 import { LocationWrapper } from "../../components/LocationWrapper";
 import { HourMinute, ImageData, LocationListData, YearMonthDate } from "@weather-and-traffic-shared/types";
 import { useAsync, useLocalStorage } from "react-use";
-import { getLocations, getRecentSearch } from "@weather-and-traffic/services";
+import { getRecentSearch } from "@weather-and-traffic/services";
 
 export const Home: FC = () => {
 	const [selectedDate, setSelectedDate] = useState<YearMonthDate | null>(null);
@@ -44,7 +44,7 @@ export const Home: FC = () => {
 				selectedLocation
 			});
 		}
-	}, [handleSelectLocation]);
+	}, [selectedLocation]);
 
 	const { value: recentSearch } = useAsync(async () => {
 		const latestFiveRecords = 5;
@@ -54,7 +54,7 @@ export const Home: FC = () => {
 			console.error(e);
 			throw e;
 		}
-	}, []);
+	}, [selectedDate, selectedTime]);
 
 	return (
 		<>
