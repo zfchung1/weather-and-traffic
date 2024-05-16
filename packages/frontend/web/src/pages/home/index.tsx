@@ -7,8 +7,10 @@ import { LocationWrapper } from "../../components/LocationWrapper";
 import { HourMinute, ImageData, LocationListData, YearMonthDate } from "@weather-and-traffic-shared/types";
 import { useAsync, useLocalStorage } from "react-use";
 import { getRecentSearch } from "@weather-and-traffic/services";
+import { LocationWeatherWrapper } from "../../components/LocationWeatherWrapper";
 
 export const Home: FC = () => {
+	const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 	const [selectedDate, setSelectedDate] = useState<YearMonthDate | null>(null);
 	const [selectedTime, setSelectedTime] = useState<HourMinute | null>(null);
 	const [selectedLocation, setSelectedLocation] = useState<LocationListData | null>(null);
@@ -19,6 +21,18 @@ export const Home: FC = () => {
 		selectedTime,
 		selectedLocation
 	});
+
+	useEffect(() => {
+		const handleResize = () => {
+			setIsMobile(window.innerWidth <= 768);
+		};
+
+		window.addEventListener("resize", handleResize);
+
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
 
 	const handleSelectLocation = (location: LocationListData) => {
 		setSelectedLocation(location);
@@ -57,50 +71,73 @@ export const Home: FC = () => {
 	}, [selectedDate, selectedTime]);
 
 	return (
-		<>
-			<div>
-				<h2>Select a Date:</h2>
-				<GenericDatePicker onSelectDate={handleDateChange} />
+		<div style={{
+			display: "block",
+			padding: 20
+		}}>
+
+			<div style={{
+				display: "flex"
+			}}>
+				<div style={{
+					flex: 1
+				}}>
+					<h2>Select a Date:</h2>
+					<GenericDatePicker onSelectDate={handleDateChange} />
+				</div>
+
+				<div style={{
+					flex: 1
+				}}>
+					<h2>Select a Time:</h2>
+					<GenericTimePicker onSelectTime={handleTimeChange} />
+				</div>
+				<div style={isMobile ? { display: "none" } : { flex: 1 }} />
 			</div>
 
-			<div>
-				<h2>Select a Time:</h2>
-				<GenericTimePicker onSelectTime={handleTimeChange} />
+			<div style={{ display: "flex" }}>
+				<div style={{ flex: 1 }}>
+					<h3>Most recent search by user:</h3>
+					{value ? value.selectedLocation?.locationName : ""}
+				</div>
+
+				<div style={{ flex: 1 }}>
+					<h3>Most recent search by other people:</h3>
+					{recentSearch ? recentSearch.map(item => {
+						return <p>{item.location}</p>;
+					}) : "No Recent Search by other people"}
+				</div>
+
+				<div style={isMobile ? { display: "none" } : { flex: 1 }} />
+
 			</div>
 
-			<div>
-				<h3>Most recent search by user:</h3>
-				{value ? value.selectedLocation?.locationName : ""}
+			<LocationWeatherWrapper
+				isMobile={isMobile}
+				selectedDate={selectedDate}
+				selectedTime={selectedTime}
+				selectedLocation={selectedLocation}
+				onSelectLocation={handleSelectLocation}
+				weather={weather}
+			/>
 
-				<h3>Most recent search by other people:</h3>
-				{recentSearch? recentSearch.map(item => {
-					return <p>{item.location}</p>
-				}) : "No Recent Search by other people"}
-
+			<div style={{ display: "flex" }}>
+				<div style={{ flex: 2 }}>
+					<h2>Traffic Cam:</h2>
+					{
+						trafficCam ?
+							<img
+								src={trafficCam.url}
+								style={{ width: "100%" }}
+								alt={`Traffic Camera Image ${selectedLocation?.cameraId} at ${selectedLocation?.locationName}`}
+							/>
+							: ""
+					}
+				</div>
+				<div style={isMobile ? { display: "none" } : { flex: 1 }} />
 			</div>
 
-			<div>
-				<h2>Select a Location:</h2>
-				<LocationWrapper
-					date={selectedDate}
-					time={selectedTime}
-					selectedLocation={selectedLocation}
-					onSelectLocation={handleSelectLocation}
-				/>
-			</div>
 
-			<div>
-				<h2>Weather Forecast:</h2>
-				{weather}
-			</div>
-
-			<div>
-				<h2>Traffic Cam:</h2>
-				{
-					trafficCam ? <Image src={trafficCam.url} /> : ""
-				}
-			</div>
-
-		</>
+		</div>
 	);
 };

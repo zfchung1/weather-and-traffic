@@ -5,6 +5,7 @@ import { getLocations } from "@weather-and-traffic/services";
 import { NewLocationList } from "../List";
 
 interface IProps {
+	isMobile: boolean;
 	date: YearMonthDate | null;
 	time: HourMinute | null;
 	selectedLocation: LocationListData | null;
@@ -13,6 +14,7 @@ interface IProps {
 
 export const LocationWrapper: FC<IProps> = (
 	{
+		isMobile,
 		date,
 		time,
 		selectedLocation,
@@ -30,11 +32,20 @@ export const LocationWrapper: FC<IProps> = (
 	}, [date, time]);
 
 	return locations ? (
-		<NewLocationList
-			data={locations}
-			selectedLocation={selectedLocation}
-			onSelectLocation={onSelectLocation}
-		/>
+		<>
+			{
+				isMobile
+					? ""
+					: <div style={{ height: "300px" }}>
+						<NewLocationList
+							data={locations}
+							selectedLocation={selectedLocation}
+							onSelectLocation={onSelectLocation}
+						/>
+					</div>
+			}
+		</>
+
 	) : (
 		<></>
 	);
