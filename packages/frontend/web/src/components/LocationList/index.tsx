@@ -7,7 +7,7 @@ interface IProps {
 	onSelectLocation: (value: LocationListData) => void;
 }
 
-export const NewLocationList = ({ data, selectedLocation, onSelectLocation }: IProps) => {
+export const LocationList = ({ data, selectedLocation, onSelectLocation }: IProps) => {
 	return (
 		<List
 			itemLayout="horizontal"

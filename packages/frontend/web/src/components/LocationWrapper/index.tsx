@@ -1,8 +1,8 @@
-import { FC, PropsWithChildren } from "react";
+import { FC } from "react";
 import { HourMinute, LocationListData, YearMonthDate } from "@weather-and-traffic-shared/types";
 import { useAsync } from "react-use";
 import { getLocations } from "@weather-and-traffic/services";
-import { NewLocationList } from "../List";
+import { LocationList } from "../LocationList";
 
 interface IProps {
 	isMobile: boolean;
@@ -33,17 +33,14 @@ export const LocationWrapper: FC<IProps> = (
 
 	return locations ? (
 		<>
-			{
-				isMobile
-					? ""
-					: <div style={{ height: "300px" }}>
-						<NewLocationList
-							data={locations}
-							selectedLocation={selectedLocation}
-							onSelectLocation={onSelectLocation}
-						/>
-					</div>
-			}
+			<div style={isMobile ? { height: "100px" } : { height: "300px" }}>
+				<LocationList
+					data={locations}
+					selectedLocation={selectedLocation}
+					onSelectLocation={onSelectLocation}
+				/>
+			</div>
+
 		</>
 
 	) : (
