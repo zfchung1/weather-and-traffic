@@ -27,10 +27,10 @@ export const LocationWeatherWrapper: FC<IProps> = (
 		: { display: "flex" };
 	const locationStyle = isMobile
 		? {}
-		: { flex: 2 };
+		: { flex: 2, padding: 10 };
 	const weatherStyle = isMobile
 		? {}
-		: { flex: 1 };
+		: { flex: 1, padding: 10 };
 
 	return (
 		<>

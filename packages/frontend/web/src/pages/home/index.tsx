@@ -2,8 +2,6 @@ import { FC, useEffect, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { GenericDatePicker } from "../../components/DatePicker";
 import { GenericTimePicker } from "../../components/TimePicker";
-import { Image } from "antd";
-import { LocationWrapper } from "../../components/LocationWrapper";
 import { HourMinute, ImageData, LocationListData, YearMonthDate } from "@weather-and-traffic-shared/types";
 import { useAsync, useLocalStorage } from "react-use";
 import { getRecentSearch } from "@weather-and-traffic/services";
@@ -35,7 +33,7 @@ export const Home: FC = () => {
 	}, []);
 
 	const handleSelectLocation = (location: LocationListData) => {
-		console.log({ location })
+		console.log({ location });
 		setSelectedLocation(location);
 	};
 
@@ -67,7 +65,7 @@ export const Home: FC = () => {
 			return await getRecentSearch(latestFiveRecords);
 		} catch (e) {
 			console.error(e);
-			throw e;
+			return [];
 		}
 	}, [selectedDate, selectedTime]);
 
@@ -81,14 +79,16 @@ export const Home: FC = () => {
 				display: "flex"
 			}}>
 				<div style={{
-					flex: 1
+					flex: 1,
+					padding: 10
 				}}>
 					<h2>Select a Date:</h2>
 					<GenericDatePicker onSelectDate={handleDateChange} />
 				</div>
 
 				<div style={{
-					flex: 1
+					flex: 1,
+					padding: 10
 				}}>
 					<h2>Select a Time:</h2>
 					<GenericTimePicker onSelectTime={handleTimeChange} />
@@ -97,12 +97,12 @@ export const Home: FC = () => {
 			</div>
 
 			<div style={{ display: "flex" }}>
-				<div style={{ flex: 1 }}>
+				<div style={{ flex: 1, padding: 10 }}>
 					<h3>Most recent search by user:</h3>
 					{value ? value.selectedLocation?.locationName : ""}
 				</div>
 
-				<div style={{ flex: 1 }}>
+				<div style={{ flex: 1, padding: 10 }}>
 					<h3>Most recent search by other people:</h3>
 					{recentSearch ? recentSearch.map(item => {
 						return <p>{item.location}</p>;
@@ -123,7 +123,7 @@ export const Home: FC = () => {
 			/>
 
 			<div style={{ display: "flex" }}>
-				<div style={{ flex: 2 }}>
+				<div style={{ flex: 2, padding: 10 }}>
 					<h2>Traffic Cam:</h2>
 					{
 						trafficCam ?

@@ -7,7 +7,7 @@ export async function getRecentSearch(limit: number) {
 	try {
 		const response = await fetch(locationsApiUrl + query);
 		if (!response.ok) {
-			// do something
+			throw new Error(`Error fetching data ${response.status}`);
 		}
 		return await response.json() as SearchRecordData[];
 	} catch (error) {
