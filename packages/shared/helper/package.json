@@ -1,0 +1,10 @@
+{
+  "name": "@weather-and-traffic-shared/helper",
+  "version": "0.0.1",
+  "private": true,
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist && tsc"
+  }
+}

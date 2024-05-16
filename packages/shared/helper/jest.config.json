@@ -1,0 +1,6 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "jsdom",
+  "collectCoverageFrom": ["src/**/*.{js,jsx,ts,tsx}"],
+  "modulePathIgnorePatterns": ["<rootDir>/dist/"]
+}

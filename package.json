@@ -8,21 +8,23 @@
   "private": true,
   "scripts": {
     "build": "yarn workspaces run build",
-    "start": "yarn workspace @weather-and-traffic/web start",
-    "clean": "rm -rf node_modules ./packages/*/*/{dist,node_modules,build,coverage,storybook-static}",
+    "start": "dotenv concurrently \"yarn workspace @weather-and-traffic-api/server start\" \"yarn workspace @weather-and-traffic/web start\"",
+    "clean": "rm -rf node_modules ./packages/*/*/{dist,node_modules,build,coverage}",
     "reset": "yarn clean && yarn && yarn build",
     "db-migration:make": "yarn workspace @weather-and-traffic-api/data db-migration:make",
     "db-migration:migrate": "dotenv yarn workspace @weather-and-traffic-api/data db-migration:migrate"
   },
   "workspaces": {
     "packages": [
-      "packages/frontend/services",
-      "packages/frontend/*",
+      "packages/shared/*",
+      "packages/api/data",
       "packages/api/*",
-      "packages/shared/*"
+      "packages/frontend/services",
+      "packages/frontend/*"
     ]
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.2"
   }

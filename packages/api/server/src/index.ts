@@ -1,6 +1,7 @@
 import express from "express";
 import helmet from "helmet";
 import locationRoute from "./routes/location";
+import recordRoute from "./routes/record";
 import cors from "cors";
 
 const app = express();
@@ -14,5 +15,6 @@ app.use(helmet())
 			credentials: true
 		})
 	)
-	.use("/locations", locationRoute);
+	.use("/locations", locationRoute)
+	.use("/recent-search", recordRoute);
 export default app;
