@@ -5,7 +5,7 @@ A simple web application that shows traffic cam and weather information on a par
 ## Description
 
 Requirements: the team wants to create a simple application utilizing the open source data from
-https://guide.data.gov.sg/developers/api-v2. You will be using the following APIs:
+https://guide.data.gov.sg/developers/api-v2. We will be using the following APIs:
 
 1. Traffic Images ([link]("https://beta.data.gov.sg/datasets/d_6cdb6b405b25aaaacbaf7689bcc6fae0/view"))
 2. Weather
@@ -77,17 +77,11 @@ Example: Docker
 1. Clone the repository:
 
 ```shell
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/zfchung1/weather-and-traffic
 cd weather-and-traffic
 ``` 
 
-2. Set up environment
-
-```shell
-
-```
-
-3. Install Dependencies
+2. Install Dependencies
 
 `yarn` to install dependencies, while `yarn build` to build dependencies to be used between packages in monorepo (yarn
 workspaces).
