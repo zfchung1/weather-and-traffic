@@ -54,6 +54,7 @@ Incomplete Features:
    * The application UI is built with the bare minimum effort, enough to demonstrate certain level of responsiveness. 
    * When there is waiting time from dependencies (e.g. API loads data), it'd be good to provide user some feedback by having a skeleton / loading animation to avoid confusion for users. 
    * Ideally, we should also measure the frontend using LightHouse or Web Vitals as a benchmark. 
+   * We could also consider the timezone of user's browser, if this site will be used by users from different timezone.
 4. Eslint 
 5. Hosting demonstration
    * If time permitted, would love to demonstrate how to setup CI/CD using Github Actions, Terraform. We could consider Serverless architecture / K8s based on the demand of the traffic, and if we need to consider to lift and shift the application from different cloud hosting providers. 
