@@ -1,7 +1,19 @@
 import { ITrafficImages } from "./types";
 import { partialIsoString } from "@weather-and-traffic-shared/types";
+import { memoryClientFactory } from "@weather-and-traffic-api/cache";
+
+const memoryClient = memoryClientFactory("cache:");
+const fifteenMinutesInSeconds = 900;
 
 async function newGetTrafficCamData(dateTime: partialIsoString) {
+	const cacheKey = `traffic:${dateTime}`;
+	const cachedResult = await memoryClient.getItem<ITrafficImages>(cacheKey);
+
+	if (cachedResult) {
+		console.log(`Return cached result for ${cacheKey}`);
+		return cachedResult;
+	}
+
 	const trafficCamApiUrl = "https://api.data.gov.sg/v1/transport/traffic-images";
 	const query = `?date_time=${encodeURIComponent(dateTime)}`;
 
@@ -10,7 +22,9 @@ async function newGetTrafficCamData(dateTime: partialIsoString) {
 		if (!response.ok) {
 			// do something
 		}
-		return await response.json() as ITrafficImages;
+		const result = await response.json() as ITrafficImages;
+		await memoryClient.setItem(cacheKey, result, fifteenMinutesInSeconds);
+		return result;
 	} catch (error) {
 		console.error("Error fetching data:", error);
 		throw error;
