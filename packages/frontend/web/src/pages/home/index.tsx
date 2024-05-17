@@ -33,7 +33,6 @@ export const Home: FC = () => {
 	}, []);
 
 	const handleSelectLocation = (location: LocationListData) => {
-		console.log({ location });
 		setSelectedLocation(location);
 	};
 

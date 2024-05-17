@@ -14,17 +14,20 @@ export const LocationList = ({ data, selectedLocation, onSelectLocation }: IProp
 			dataSource={data}
 			style={{
 				height: "100%",
-				overflowY: "scroll"
+				overflowY: "scroll",
+				padding: '0 16px',
+				border: '1px solid rgba(140, 140, 140, 0.35)',
 			}}
 			renderItem={(item, index) => (
 				<List.Item
 					onClick={() => onSelectLocation(item)}
 					style={{
 						cursor: "pointer",
-						border: item.cameraId === selectedLocation?.cameraId ? "2px solid blue" : "none"
+						border: item.cameraId === selectedLocation?.cameraId ? "2px solid blue" : "none",
+						padding: "3px"
 					}}
 				>
-					{item.locationName}
+					{`${item.locationName}: ${item.cameraId}`}
 				</List.Item>
 			)}
 		/>

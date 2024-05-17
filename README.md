@@ -29,9 +29,7 @@ Features:
 
 Incomplete Features:
 
-
 ## Assumptions and Interpretations
-
 
 ## Getting Started
 
@@ -63,34 +61,42 @@ cd weather-and-traffic
 
 3. Install Dependencies
 
+`yarn` to install dependencies, while `yarn build` to build dependencies to be used between packages in monorepo (yarn
+workspaces).
+
 ```shell
 yarn
+yarn build
 ```
 
 ### Configuration
 
-Create and populate `.env` file at the project folder root level based on the example provided in `.env-example`.
+Create and populate `.env` file at the project folder root level based on the example provided in `.env-example`. 
 
 ### Running the application
 
-Create dummy records to test the Report APIs. Running this command will create a set of record in the database to simulate a search history of locations by users in the past. 
+Create dummy records to test the Report APIs. Running this command will create a set of record in the database to
+simulate a search history of locations by users in the past.
 
 ```shell
 yarn db-migration:migrate
 ```
 
-Run the application. The frontend application will be running at local host port 3000, API application will be running on port 9001.
+Run the application. The frontend application will be running at local host port 3000, API application will be running
+on port 9001.
 
 ```shell
 yarn start 
 ```
-### Running Test 
+
+### Running Test
 
 ```shell
 yarn test 
 ```
 
 ## Contact
+
 * Chung Zhan Foong (Zack)
 * zfchung1@gmail.com
 * https://github.com/zfchung1
