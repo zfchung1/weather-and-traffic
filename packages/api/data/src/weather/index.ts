@@ -8,7 +8,7 @@ async function newGetWeatherData(dateTime: partialIsoString) {
 	try {
 		const response = await fetch(trafficCamApiUrl + query);
 		if (!response.ok) {
-			// do something
+			// do something to handle the error
 		}
 		return await response.json() as IWeatherForecast;
 	} catch (error) {

@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "test": "jest",
+    "test": "jest --coverage",
     "db-migration:make": "knex migrate:make --env production",
     "db-migration:migrate": "knex migrate:latest --env production"
   },
