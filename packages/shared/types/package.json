@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "tsc --project ./tsconfig.build.json",
-    "start": "tsc --project ./tsconfig.build.json --watch"
+    "start": "tsc --project ./tsconfig.build.json --watch",
+    "test": "jest --passWithNoTests"
   },
   "dependencies": {
     "type-fest": "^4.18.2"

@@ -5,7 +5,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "nodemon",
-    "build": "rm -rf dist && tsc"
+    "build": "rm -rf dist && tsc",
+    "test": "jest --passWithNoTests"
   },
   "dependencies": {
     "@types/cors": "^2.8.17",

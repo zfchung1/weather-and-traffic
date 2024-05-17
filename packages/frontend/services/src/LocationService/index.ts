@@ -7,7 +7,7 @@ async function getLocationData(date: YearMonthDate, time: HourMinute) {
 	try {
 		const response = await fetch(locationsApiUrl + query);
 		if (!response.ok) {
-			// do something
+			throw new Error(`Error fetching data: ${response.status}`)
 		}
 		return await response.json() as LocationList;
 	} catch (error) {
